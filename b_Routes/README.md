@@ -21,4 +21,4 @@ This article, titled **"Learning Flask A … Z: Routes"**, offers an in-depth ex
 - The article emphasizes organized and modular code practices for scalability.
 
 ### Link to the Article:
-[Learning Flask A … Z: Routes by Binayak Basu](https://medium.com/@basubinayak05/learning-flask-a-z-routes-039de133032f)
+[Learning Flask A … Z: Routes](https://medium.com/@basubinayak05/learning-flask-a-z-routes-039de133032f)
