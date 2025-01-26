@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import checkbox   %}
+
+{% block header %}
+    <h1>LOGIN FORM</h1>
+    <h2>Please Login to continue!</h2>
+{% endblock %}
+
+{% block content %}
+    <form action="/login" method="POST">
+        <label for="username"><h3>Username</h3></label>
+        <input type="text" id="username" name="username">
+        <br/><br/>
+        <label><h3>Programming Languages Known</h3></label>
+        <!-- <input type="checkbox" id="python" name="languages" value="Python">
+        <label for="python">Python</label> -->
+        {{ checkbox(label='Python', id='python') }}
+        <!-- <input type="checkbox" id="javascript" name="languages" value="JavaScript">
+        <label for="javascript">JavaScript</label> -->
+        {{ checkbox(label='Javascript', id='javascript') }}
+        <!-- <input type="checkbox" id="java" name="languages" value="Java">
+        <label for="java">Java</label> -->
+        {{ checkbox(label='Java', id='java') }}
+        <!-- <input type="checkbox" id="csharp" name="languages" value="C#">
+        <label for="csharp">C#</label> -->
+        {{ checkbox(label='C#', id='C#') }}
+        <br/><br/>
+        <label for="comment"><h3>Comments(if any)</h3></label>
+        <textarea id="comment" name="comment" placeholder="Comments, if any!"></textarea>
+        <br/><br/>
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}

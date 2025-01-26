@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My App{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a> |
+            <a href="{{ url_for('profile') }}">Profile</a> |
+            <a href="{{ url_for('settings') }}">Settings</a> |
+            {% if 'username' in session %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </nav>
+        {% block header %}{% endblock %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
+
+{#
+1. Use double curly braces {{ }} to output the value of a variable.
+2. Perform basic calculations or logic inside {{ }}
+3.  {% if user %}
+        Hello, {{ user }}!
+    {% else %}
+        Hello, Guest!
+    {% endif %}
+4.  <ul>
+        {% for item in items %}
+            <li>{{ item }}</li> 
+        {% endfor %}
+    </ul>
+5.  {% macro input(name, value='', type='text') %}
+        <input type="{{ type }}" name="{{ name }}" value="{{ value }}">
+    {% endmacro %}
+6. inheritance - child template {% extends "base.html" %}
+7. Filters modify the value of variables. They are added after a variable with a pipe (|).
+    {{ name | upper }}           { Convert to uppercase } 
+    {{ value | round(2) }}       { Round to 2 decimal places }
+    {{ list | length }}          { Get the length of the list }
+8. include template
+    {% include 'header.html' %}
+    <p>Main content</p>
+    {% include 'footer.html' %}
+9. import macros from another template file
+    {% import 'macros.html' as macros %}
+    {{ macros.input('username') }}
+10. Stripping Whitespace: Use hyphens to control whitespace {{-'Hello'-}}
+11. To escape Jinja syntax, use {% raw %} and {% endraw %}
+    {% raw %}
+        {{ This will not be processed }}
+    {% endraw %}
+12. Custome filter
+
+    # filters.py
+    def reverse_string(s):
+        return s[::-1]
+
+    # app.py
+    from flask import Flask, render_template
+    import filters  # Import the filters module
+
+    app = Flask(__name__)
+
+    # Register the custom filter with the Jinja environment
+    app.jinja_env.filters['reverse'] = filters.reverse_string
+
+    @app.route('/')
+    def home():
+        example_string = "Hello, World!"
+        return render_template('home.html', example_string=example_string)
+
+    if __name__ == '__main__':
+        app.run(debug=True)
+
+    templates/home.html
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Custom Filter Example</title>
+    </head>
+    <body>
+        <p>Original: {{ example_string }}</p>
+        <p>Reversed: {{ example_string | reverse }}</p>
+    </body>
+    </html>
+13. custom tests
+
+    # tests.py
+    def is_even(n):
+        return n % 2 == 0
+    
+    # app.py
+    import tests  # Import the tests module
+
+    app = Flask(__name__)
+
+    # Register the custom test with the Jinja environment
+    app.jinja_env.tests['even'] = tests.is_even
+
+    ....
+    ....
+    ....
+
+    templates/home.html
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Custom Filter and Test Example</title>
+    </head>
+    <body>
+        <p>Original: {{ example_string }}</p>
+        <p>Reversed: {{ example_string | reverse }}</p>
+        
+        <p>Numbers and their even status:</p>
+        <ul>
+            {% for number in numbers %}
+                <li>{{ number }} is {% if number is even %}even{% else %}odd{% endif %}</li>
+            {% endfor %}
+        </ul>
+    </body>
+    </html>
+#}
+
+
+
+
+
+
+
+
+
+
+

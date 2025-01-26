@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block header %}
+  <h1>Settings for {{ username }}</h1>
+{% endblock %}
+
+{% block content %}
+  <h2>{{ username }} in upper case :</h2>
+  <h3>{{ username | upper }}</h3>
+  <h2>What is the length of the {{ username }}?</h2>
+  <h3>{{ username | length }}</h3>
+  <h2>How many programming languages does the user {{ username | upper }} know?</h2>
+  <h3>{{ languages | length }}</h3>
+  <h2>Is the length of the comment by the user, {{ username }} less than 100?</h2>
+  <h3>{{ comment | isLessThan100 }}</h3>
+{% endblock %}
